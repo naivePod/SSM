@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/aop
+                           http://www.springframework.org/schema/aop/spring-aop-3.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <bean id="aspect" class="com.lgs.aspect.Aspect"/>
+    <bean id="controllerAop" class="com.lgs.AOP.ControllerAop"/>
+    <bean id="configController" class="com.lgs.controller.ConfigController"/>
+
+    <context:component-scan base-package="com.lgs"  annotation-config="true"/>
+    <aop:config>
+        <aop:aspect id="myAop" ref="controllerAop">
+            <aop:pointcut id="target" expression="execution(com.lgs.beans.ResultBean *(..))"/>
+            <aop:around method="handlerControllerMethod" pointcut-ref="target"/>
+        </aop:aspect>
+    </aop:config>
+    <!--<aop:config>-->
+        <!--<aop:aspect ref="aspect">-->
+            <!--<aop:before method="beforeAdvice" pointcut="execution(* com.lgs..*.*sayHello(..)) and args(name,count)" arg-names="name,count"/>-->
+            <!--<aop:after-returning method="afterReturningAdvice" pointcut="execution(* com.lgs..*.*sayAfterReturning(..))" arg-names="retVal" returning="retVal"/>-->
+
+        <!--</aop:aspect>-->
+    <!--</aop:config>-->
+    <aop:aspectj-autoproxy/>
+
+</beans>
