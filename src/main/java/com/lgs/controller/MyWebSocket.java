@@ -1,6 +1,7 @@
 package com.lgs.controller;
 
 import com.lgs.pojo.Content;
+import org.springframework.stereotype.Component;
 import org.springframework.web.socket.server.standard.SpringConfigurator;
 
 import javax.websocket.*;
@@ -16,6 +17,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
  * @Description:WebSocket
  */
 
+
 @ServerEndpoint(value = "/websocket", configurator = SpringConfigurator.class)
 public class MyWebSocket {
     private static int onlineCount = 0;
@@ -26,19 +28,21 @@ public class MyWebSocket {
     }
 
     @OnOpen
-    public void onOpen(Session session, EndpointConfig config) {
+    public void onOpen(Session session, EndpointConfig config) throws IOException {
         this.session = session;
         set.add(this);
 
         addOnlineCount();
         //todo ip
+        this.session.getBasicRemote().sendText(String.valueOf(getOnlineCount()));
         System.out.println("有新连接进来的，当前人数："+getOnlineCount()+" IP:");
     }
 
     @OnClose
-    public void onClose() {
+    public void onClose() throws IOException {
         set.remove(this);
         removeOnlineCount();
+        this.session.getBasicRemote().sendText(String.valueOf(getOnlineCount()));
         System.out.println("有一连接关闭，当前人数"+getOnlineCount());
     }
 

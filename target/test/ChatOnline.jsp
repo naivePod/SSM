@@ -16,7 +16,7 @@
     <base href="<%=basePath%>">
     <!-- Bootstrap -->
     <link rel="stylesheet"
-          href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+          href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -72,7 +72,7 @@
     var websocket = null;
     //判断当前浏览器是否支持WebSocket
     if ('WebSocket' in window) {
-        websocket = new WebSocket("ws://192.168.0.102:8080/ssm/websocket");
+        websocket = new WebSocket("ws://192.168.200.166:8080/websocket");
     }
     else {
         alert("对不起！你的浏览器不支持webSocket")
@@ -120,11 +120,12 @@
         websocket.send(msg);
         ue.setContent('');
     }
+
 </script>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<%--<script type="text/javascript" src="<%=path%>/js/Globals.js"></script>--%>
-<%--<script type="text/javascript" src="<%=path%>/js/websocket.js"></script>--%>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="<%=path%>/js/Globals.js"></script>
+<script type="text/javascript" src="<%=path%>/js/websocket.js"></script>
 </html>

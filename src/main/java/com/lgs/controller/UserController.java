@@ -40,7 +40,10 @@ public class UserController {
             return "../../login";
         }
     }
-
+    @RequestMapping(value = "/chat",method = RequestMethod.GET)
+    public String chat() {
+        return "ChatOnline";
+    }
     @RequestMapping("/admin")
     public String admin(){
         return "admin";
